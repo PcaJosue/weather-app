@@ -1,0 +1,26 @@
+<div class='highlight'>
+    <div class='highlight__description'>{{highlight.description}}</div>
+    <div class='highlight__info'>
+        <span class='highlight__info-value'>{{highlight.info.value}}</span>
+        <span class='highlight__info-metric'>{{highlight.info.metric}}</span>
+    </div>
+    <div class='highlight__graphic' *ngIf='highlight.graphic'>
+        <div class='highlight__graphic-wind' *ngIf='highlight.graphic.type === "wind"'>
+            <mat-icon>{{highlight.graphic.icon}}</mat-icon>
+            <span>{{highlight.graphic.label}}</span>
+        </div>
+        <div *ngIf='highlight.graphic.type == "humidity"' class='highlight__graphic-humidity'>
+            <div class='progress-info'>
+                <span class='progress-label'>0</span>
+                <span class='progress-label'> 50</span>
+                <span class='progress-label'>100</span>
+            </div>
+            <mat-progress-bar mode="determinate" color='#FFEC65' [value]="highlight.graphic.label">
+            </mat-progress-bar>
+            <div class='progress-info'>
+                <span></span>
+                <span class='progress-label'>%</span>
+            </div>
+        </div>
+    </div>
+</div>

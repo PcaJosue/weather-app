@@ -1,0 +1,62 @@
+.highlight {
+    width: 328px;
+    height: 204px;
+    background-color: #1e213a;
+    color: #e7e7eb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+
+    &__description {
+        font-size: 16px;
+        line-height: 18.78px;
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    &__info {
+        line-height: 75.14px;
+        font-weight: 700;
+        font-size: 64px;
+        display: flex;
+        gap: 3px;
+    }
+
+    &__graphic {
+        font-size: 14px;
+        line-height: 16.44px;
+        font-weight: 500;
+        width: 75%;
+        &-wind {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            mat-icon {
+                background-color: rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                transform: rotate(45deg);
+            }
+        }
+        &-humidity {
+            ::ng-deep .mat-progress-bar-fill::after {
+                background-color: #ffec65 !important;
+            }
+        }
+    }
+}
+
+.progress {
+    &-info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    &-label {
+        font-size: 12px;
+        line-height: 14.09px;
+    }
+}

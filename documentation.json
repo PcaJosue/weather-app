@@ -1,0 +1,687 @@
+{
+    "pipes": [],
+    "interfaces": [
+        {
+            "name": "Highlight",
+            "id": "interface-Highlight-06a2e2dc2c6cb4d7731883abf8eaf378",
+            "file": "src/app/model/highlight.model.ts",
+            "type": "interface",
+            "sourceCode": "export interface Highlight {\r\n    description: string;\r\n    info: { value: number, metric: string },\r\n    graphic?: {\r\n        icon?: string,\r\n        label: string | number,\r\n        type: 'wind' | 'humidity'\r\n    }\r\n}",
+            "properties": [
+                {
+                    "name": "description",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "graphic",
+                    "type": "literal type",
+                    "optional": true,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "info",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 150,
+            "methods": []
+        },
+        {
+            "name": "Short",
+            "id": "interface-Short-ac640b32c656b720d18461a4c7e92654",
+            "file": "src/app/model/short.model.ts",
+            "type": "interface",
+            "sourceCode": "export interface Short {\r\n    date: string,\r\n    img: string,\r\n    range: {\r\n        min: string,\r\n        max: string\r\n    }\r\n}",
+            "properties": [
+                {
+                    "name": "date",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "img",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                },
+                {
+                    "name": "range",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 150,
+            "methods": []
+        }
+    ],
+    "injectables": [],
+    "classes": [],
+    "directives": [],
+    "components": [
+        {
+            "name": "AppComponent",
+            "id": "component-AppComponent-b999f74117697e19a5495558c65bad62",
+            "file": "src/app/app.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-root",
+            "styleUrls": [
+                "./app.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./app.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "title",
+                    "defaultValue": "'intro-storybook-angular-template'",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'intro-storybook-angular-template';\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./app.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<app-highlight></app-highlight>"
+        },
+        {
+            "name": "HighlightComponent",
+            "id": "component-HighlightComponent-91209d2b94ea2db5bc4c2063ad609054",
+            "file": "src/app/components/highlight/highlight.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-highlight",
+            "styleUrls": [
+                "./highlight.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./highlight.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "highlight",
+                    "line": 11,
+                    "type": "Highlight"
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 15
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { Highlight } from 'src/app/model/highlight.model';\n\n@Component({\n  selector: 'app-highlight',\n  templateUrl: './highlight.component.html',\n  styleUrls: ['./highlight.component.scss']\n})\nexport class HighlightComponent implements OnInit {\n\n  @Input() highlight: Highlight;\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".highlight {\r\n    width: 328px;\r\n    height: 204px;\r\n    background-color: #1e213a;\r\n    color: #e7e7eb;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    gap: 6px;\r\n\r\n    &__description {\r\n        font-size: 16px;\r\n        line-height: 18.78px;\r\n        font-weight: 500;\r\n        font-style: normal;\r\n    }\r\n\r\n    &__info {\r\n        line-height: 75.14px;\r\n        font-weight: 700;\r\n        font-size: 64px;\r\n        display: flex;\r\n        gap: 3px;\r\n    }\r\n\r\n    &__graphic {\r\n        font-size: 14px;\r\n        line-height: 16.44px;\r\n        font-weight: 500;\r\n        width: 75%;\r\n        &-wind {\r\n            display: flex;\r\n            flex-direction: row;\r\n            align-items: center;\r\n            justify-content: center;\r\n            gap: 5px;\r\n            mat-icon {\r\n                background-color: rgba(255, 255, 255, 0.3);\r\n                border-radius: 50%;\r\n                transform: rotate(45deg);\r\n            }\r\n        }\r\n        &-humidity {\r\n            ::ng-deep .mat-progress-bar-fill::after {\r\n                background-color: #ffec65 !important;\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n.progress {\r\n    &-info {\r\n        display: flex;\r\n        flex-direction: row;\r\n        justify-content: space-between;\r\n    }\r\n    &-label {\r\n        font-size: 12px;\r\n        line-height: 14.09px;\r\n    }\r\n}\r\n",
+                    "styleUrl": "./highlight.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 11
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class='highlight'>\n    <div class='highlight__description'>{{highlight.description}}</div>\n    <div class='highlight__info'>\n        <span class='highlight__info-value'>{{highlight.info.value}}</span>\n        <span class='highlight__info-metric'>{{highlight.info.metric}}</span>\n    </div>\n    <div class='highlight__graphic' *ngIf='highlight.graphic'>\n        <div class='highlight__graphic-wind' *ngIf='highlight.graphic.type === \"wind\"'>\n            <mat-icon>{{highlight.graphic.icon}}</mat-icon>\n            <span>{{highlight.graphic.label}}</span>\n        </div>\n        <div *ngIf='highlight.graphic.type == \"humidity\"' class='highlight__graphic-humidity'>\n            <div class='progress-info'>\n                <span class='progress-label'>0</span>\n                <span class='progress-label'> 50</span>\n                <span class='progress-label'>100</span>\n            </div>\n            <mat-progress-bar mode=\"determinate\" color='#FFEC65' [value]=\"highlight.graphic.label\">\n            </mat-progress-bar>\n            <div class='progress-info'>\n                <span></span>\n                <span class='progress-label'>%</span>\n            </div>\n        </div>\n    </div>\n</div>"
+        },
+        {
+            "name": "ShortComponent",
+            "id": "component-ShortComponent-75b7ea5b54e184679a16cfa5fca7fa33",
+            "file": "src/app/components/short/short.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-short",
+            "styleUrls": [
+                "./short.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./short.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "short",
+                    "line": 11,
+                    "type": "Short"
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 14
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { Short } from 'src/app/model/short.model';\n\n@Component({\n  selector: 'app-short',\n  templateUrl: './short.component.html',\n  styleUrls: ['./short.component.scss']\n})\nexport class ShortComponent implements OnInit {\n\n  @Input() short: Short\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".short {\r\n    background-color: #1e213a;\r\n    width: 120px;\r\n    height: 177px;\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    color: #e7e7eb;\r\n\r\n    &__date,\r\n    &__range {\r\n        font-size: 16px;\r\n        line-height: 19px;\r\n    }\r\n    &__img {\r\n        width: 56.44px;\r\n        height: 62px;\r\n    }\r\n\r\n    &__range {\r\n        display: flex;\r\n        justify-content: space-around;\r\n        &-min {\r\n            color: #a09fb1;\r\n        }\r\n    }\r\n}\r\n",
+                    "styleUrl": "./short.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 11
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div clas='short'>\n    <div class='short__date'>{{short.date}}</div>\n    <div class='short__img'>\n        <img src='../../../assets/img/{{short.img}}.png'>\n    </div>\n    <div class='short__range'>\n        <span>{{short.range.max}}</span>\n        <span class='short__range-min'>{{short.range.min}}</span>\n    </div>\n</div>"
+        }
+    ],
+    "modules": [
+        {
+            "name": "AppModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        },
+                        {
+                            "name": "HighlightComponent"
+                        },
+                        {
+                            "name": "ShortComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "MaterialModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "MaterialModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "components",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/component.ts",
+                "type": "[]",
+                "defaultValue": "[\r\n    HighlightComponent,\r\n    ShortComponent\r\n]"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.prod.ts",
+                "type": "object",
+                "defaultValue": "{\n  production: true\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.ts",
+                "type": "object",
+                "defaultValue": "{\n  production: false\n}"
+            },
+            {
+                "name": "Humidity",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/highlight/highlight.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "mock",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/jest-config/__mocks__/globalMocks.ts",
+                "type": "",
+                "defaultValue": "() => {\n    let storage = {};\n    return {\n      getItem: key => (key in storage ? storage[key] : null),\n      setItem: (key, value) => (storage[key] = value || ''),\n      removeItem: key => delete storage[key],\n      clear: () => (storage = {}),\n    };\n  }"
+            },
+            {
+                "name": "Pressure",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/highlight/highlight.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Snow",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/short/short.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/short/short.stories.ts",
+                "type": "Story<ShortComponent>",
+                "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/highlight/highlight.stories.ts",
+                "type": "Story<HighlightComponent>",
+                "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
+            },
+            {
+                "name": "Visibility",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/highlight/highlight.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Wind",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/highlight/highlight.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            }
+        ],
+        "functions": [],
+        "typealiases": [],
+        "enumerations": [],
+        "groupedVariables": {
+            "src/app/component.ts": [
+                {
+                    "name": "components",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/component.ts",
+                    "type": "[]",
+                    "defaultValue": "[\r\n    HighlightComponent,\r\n    ShortComponent\r\n]"
+                }
+            ],
+            "src/environments/environment.prod.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.prod.ts",
+                    "type": "object",
+                    "defaultValue": "{\n  production: true\n}"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "type": "object",
+                    "defaultValue": "{\n  production: false\n}"
+                }
+            ],
+            "src/app/components/highlight/highlight.stories.ts": [
+                {
+                    "name": "Humidity",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/highlight/highlight.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Pressure",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/highlight/highlight.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/highlight/highlight.stories.ts",
+                    "type": "Story<HighlightComponent>",
+                    "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
+                },
+                {
+                    "name": "Visibility",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/highlight/highlight.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Wind",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/highlight/highlight.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                }
+            ],
+            "src/jest-config/__mocks__/globalMocks.ts": [
+                {
+                    "name": "mock",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/jest-config/__mocks__/globalMocks.ts",
+                    "type": "",
+                    "defaultValue": "() => {\n    let storage = {};\n    return {\n      getItem: key => (key in storage ? storage[key] : null),\n      setItem: (key, value) => (storage[key] = value || ''),\n      removeItem: key => delete storage[key],\n      clear: () => (storage = {}),\n    };\n  }"
+                }
+            ],
+            "src/app/components/short/short.stories.ts": [
+                {
+                    "name": "Snow",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/short/short.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/short/short.stories.ts",
+                    "type": "Story<ShortComponent>",
+                    "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
+                }
+            ]
+        },
+        "groupedFunctions": {},
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {}
+    },
+    "routes": [],
+    "coverage": {
+        "count": 0,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "src/app/app.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/component.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "components",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/highlight/highlight.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HighlightComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/highlight/highlight.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Humidity",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/highlight/highlight.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Pressure",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/highlight/highlight.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/highlight/highlight.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Visibility",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/highlight/highlight.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Wind",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/short/short.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ShortComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/short/short.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Snow",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/short/short.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/model/highlight.model.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Highlight",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/model/short.model.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Short",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.prod.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/jest-config/__mocks__/globalMocks.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "mock",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            }
+        ]
+    }
+}

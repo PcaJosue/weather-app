@@ -1,0 +1,13 @@
+<div class='short'>
+    <div class='short__date'>{{short.date === 'Tomorrow'? 'Tomorrow': short.date | date:['EEE, d LLL']}}</div>
+    <div>
+        <img class='short__img' src='../../../assets/img/{{short.img}}.png'>
+    </div>
+    <div class='short__range'>
+        <span>
+            {{ centigrades ? short.range.max : (short.range.max * (9/5) ) +32 }}° {{centigrades ? 'C':'F'}}</span>
+        <span class='short__range-min'>
+            {{ centigrades ? short.range.min : (short.range.min * (9/5) ) +32 }}° {{centigrades ? 'C':'F'}}
+        </span>
+    </div>
+</div>
