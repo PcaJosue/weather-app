@@ -1,0 +1,15 @@
+<div class='search__container'>
+    <mat-icon class='search__close' (click)='close()'>close</mat-icon>
+    <div class="search__search">
+        <input [(ngModel)]='searchInput' name='searchInput' id='searchInput' class="search__search-input"
+            placeholder="Search Input" [class]='error? "search__search-input-error":""' />
+        <div (click)='searchCity()' class="search__search-button">Search</div>
+    </div>
+
+    <mat-list class='search__itemlist'>
+        <mat-list-item *ngFor='let city of cities' class='search__item'>{{city.title}}</mat-list-item>
+
+    </mat-list>
+
+
+</div>

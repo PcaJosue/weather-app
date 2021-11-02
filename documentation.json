@@ -35,11 +35,58 @@
             "methods": []
         },
         {
+            "name": "Info",
+            "id": "interface-Info-a2d0eb117282f41a8f1034eafda68423",
+            "file": "src/app/model/info.model.ts",
+            "type": "interface",
+            "sourceCode": "export interface Info {\r\n    img: string;\r\n    temperature: number;\r\n    weather: string;\r\n    date: string;\r\n    ubication: string;\r\n\r\n}",
+            "properties": [
+                {
+                    "name": "date",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "img",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "temperature",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                },
+                {
+                    "name": "ubication",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                },
+                {
+                    "name": "weather",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 150,
+            "methods": []
+        },
+        {
             "name": "Short",
-            "id": "interface-Short-ac640b32c656b720d18461a4c7e92654",
+            "id": "interface-Short-4be4f3bec68038b0fb9828f5af42fa04",
             "file": "src/app/model/short.model.ts",
             "type": "interface",
-            "sourceCode": "export interface Short {\r\n    date: string,\r\n    img: string,\r\n    range: {\r\n        min: string,\r\n        max: string\r\n    }\r\n}",
+            "sourceCode": "export interface Short {\r\n    date: string,\r\n    img: string,\r\n    range: {\r\n        min: number,\r\n        max: number\r\n    }\r\n}",
             "properties": [
                 {
                     "name": "date",
@@ -68,7 +115,61 @@
             "methods": []
         }
     ],
-    "injectables": [],
+    "injectables": [
+        {
+            "name": "WeatherService",
+            "id": "injectable-WeatherService-2a9db55e3e42cddf9305dd509ae240e9",
+            "file": "src/app/services/weather.service.ts",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "searchLocation",
+                    "args": [
+                        {
+                            "name": "location",
+                            "type": "string"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 15,
+                    "jsdoctags": [
+                        {
+                            "name": "location",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "description": "",
+            "sourceCode": "import { HttpClient, HttpHeaders } from '@angular/common/http';\nimport { Injectable } from '@angular/core';\n\nconst URL = 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api';\n\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class WeatherService {\n\n  constructor(private http: HttpClient) { }\n\n\n  searchLocation(location: string) {\n    return this.http.get(`${URL}/location/search/?query=${location}`, { responseType: 'json' })\n  }\n}\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient"
+                    }
+                ],
+                "line": 10,
+                "jsdoctags": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "injectable"
+        }
+    ],
     "classes": [],
     "directives": [],
     "components": [
@@ -117,7 +218,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<app-highlight></app-highlight>"
+            "templateData": "<app-search></app-search>"
         },
         {
             "name": "HighlightComponent",
@@ -182,8 +283,169 @@
             "templateData": "<div class='highlight'>\n    <div class='highlight__description'>{{highlight.description}}</div>\n    <div class='highlight__info'>\n        <span class='highlight__info-value'>{{highlight.info.value}}</span>\n        <span class='highlight__info-metric'>{{highlight.info.metric}}</span>\n    </div>\n    <div class='highlight__graphic' *ngIf='highlight.graphic'>\n        <div class='highlight__graphic-wind' *ngIf='highlight.graphic.type === \"wind\"'>\n            <mat-icon>{{highlight.graphic.icon}}</mat-icon>\n            <span>{{highlight.graphic.label}}</span>\n        </div>\n        <div *ngIf='highlight.graphic.type == \"humidity\"' class='highlight__graphic-humidity'>\n            <div class='progress-info'>\n                <span class='progress-label'>0</span>\n                <span class='progress-label'> 50</span>\n                <span class='progress-label'>100</span>\n            </div>\n            <mat-progress-bar mode=\"determinate\" color='#FFEC65' [value]=\"highlight.graphic.label\">\n            </mat-progress-bar>\n            <div class='progress-info'>\n                <span></span>\n                <span class='progress-label'>%</span>\n            </div>\n        </div>\n    </div>\n</div>"
         },
         {
+            "name": "InfoComponent",
+            "id": "component-InfoComponent-66debab3487b1252bf63415b28758b0e",
+            "file": "src/app/components/info/info.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-info",
+            "styleUrls": [
+                "./info.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./info.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "centigrades",
+                    "line": 12,
+                    "type": "boolean"
+                },
+                {
+                    "name": "info",
+                    "line": 13,
+                    "type": "Info"
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 16
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { Info } from 'src/app/model/info.model';\n\n@Component({\n  selector: 'app-info',\n  templateUrl: './info.component.html',\n  styleUrls: ['./info.component.scss']\n})\nexport class InfoComponent implements OnInit {\n\n\n  @Input() centigrades: boolean;\n  @Input() info: Info;\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".info::after {\r\n    position: absolute;\r\n    content: \"\";\r\n    background-image: url(../../../assets/img/Cloud-background.png);\r\n    opacity: 0.1;\r\n    height: 100vh;\r\n    width: 659px;\r\n    top: 0;\r\n    z-index: 2;\r\n    background-position: left top;\r\n    background-repeat: repeat-x;\r\n    background-size: contain;\r\n}\r\n\r\n.info {\r\n    position: relative;\r\n    box-sizing: border-box;\r\n    background-color: #1e213a;\r\n    height: 100vh;\r\n    width: 459px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 2rem;\r\n\r\n    &__search {\r\n        position: absolute;\r\n        width: 85%;\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-items: center;\r\n        z-index: 10;\r\n\r\n        &-button {\r\n            color: #e7e7eb;\r\n            font-size: 16px;\r\n            line-height: 19px;\r\n            background-color: #6e707a;\r\n            height: 40px;\r\n            width: 161px;\r\n            text-align: center;\r\n            cursor: pointer;\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n        }\r\n\r\n        &-current {\r\n            background-color: #6e707a;\r\n            color: #e7e7eb;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n    &__temperature {\r\n        font-size: 144px;\r\n        line-height: 169px;\r\n        color: #e7e7eb;\r\n        display: flex;\r\n        align-items: flex-end;\r\n        gap: 5px;\r\n        &-metric {\r\n            color: #88869d;\r\n            font-size: 50px;\r\n        }\r\n    }\r\n\r\n    &__weather {\r\n        color: #a09fb1;\r\n        font-size: 36px;\r\n        line-height: 42px;\r\n        font-weight: 600;\r\n    }\r\n\r\n    &__date {\r\n        font-style: normal;\r\n        font-weight: 500;\r\n        font-size: 18px;\r\n        line-height: 21px;\r\n        display: flex;\r\n        gap: 35px;\r\n        align-items: center;\r\n    }\r\n\r\n    &__ubication {\r\n        display: flex;\r\n        gap: 20px;\r\n        justify-content: center;\r\n        align-items: center;\r\n    }\r\n\r\n    &__footer {\r\n        display: flex;\r\n        flex-direction: column;\r\n        gap: 15px;\r\n        color: #88869d;\r\n    }\r\n}\r\n",
+                    "styleUrl": "./info.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 13
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"info\">\n    <div class=\"info__search\">\n        <div class='info__search-button'><span>Search for places</span></div>\n        <mat-icon class='info__search-current'>my_location</mat-icon>\n    </div>\n    <img class='info__img' src='../../../assets/img/{{info.img}}.png'>\n    <div class=\"info__temperature\">\n        <span class='info__temperature-value'>{{ centigrades ? info.temperature : (info.temperature * (9/5) ) +32\n            }}</span>\n        <span class='info__temperature-metric'> ° {{centigrades ? 'C':'F'}}</span>\n    </div>\n    <div class=\"info__weather\">{{info.weather}}</div>\n\n    <div class='info__footer'>\n        <div class=\"info__date\">\n            <span>Today</span>\n            <span>.</span>\n            <span>{{info.date | date:['EEE, d LLL']}}</span>\n        </div>\n        <div class=\"info__ubication\">\n            <mat-icon>place</mat-icon>\n            <span>{{info.ubication}}</span>\n        </div>\n    </div>\n</div>"
+        },
+        {
+            "name": "SearchComponent",
+            "id": "component-SearchComponent-62c15cf108e69033378b102b6ab584c5",
+            "file": "src/app/components/search/search.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-search",
+            "styleUrls": [
+                "./search.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./search.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "cities",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "searchInput",
+                    "defaultValue": "''",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18
+                },
+                {
+                    "name": "searchCity",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 21
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormControl } from '@angular/forms';\nimport { WeatherService } from 'src/app/services/weather.service';\n\n@Component({\n  selector: 'app-search',\n  templateUrl: './search.component.html',\n  styleUrls: ['./search.component.scss']\n})\nexport class SearchComponent implements OnInit {\n\n  searchInput = '';\n  cities;\n\n\n  constructor(private weatherService: WeatherService) { }\n\n  ngOnInit(): void {\n  }\n\n  searchCity() {\n    this.weatherService.searchLocation(this.searchInput).subscribe(data => {\n      console.log('data', data);\n    })\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".search {\r\n    &__container {\r\n        background-color: #1e213a;\r\n        width: 459px;\r\n        height: 100vh;\r\n        display: flex;\r\n        flex-direction: column;\r\n        gap: 1rem;\r\n        color: #e7e7eb;\r\n        padding: 1.5rem;\r\n    }\r\n    &__close {\r\n        align-self: end;\r\n        padding: 1rem;\r\n        cursor: pointer;\r\n    }\r\n\r\n    &__search {\r\n        width: 100%;\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-self: center;\r\n        position: relative;\r\n\r\n        &-input {\r\n            width: 268px;\r\n            height: 48px;\r\n            border: 1px solid #e7e7eb;\r\n            box-sizing: border-box;\r\n            background-color: inherit;\r\n            color: inherit;\r\n        }\r\n\r\n        &-button {\r\n            width: 86px;\r\n            height: 48px;\r\n            background-color: #3c47e9;\r\n            color: inherit;\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n\r\n    &__itemlist {\r\n        display: flex;\r\n        flex-direction: column;\r\n        gap: 1rem;\r\n        height: 70%;\r\n        overflow: auto;\r\n    }\r\n    &__item {\r\n        box-sizing: border-box;\r\n        color: #e7e7eb;\r\n        height: 64px;\r\n        cursor: pointer;\r\n        position: relative;\r\n        width: 86px;\r\n        &:hover {\r\n            border: 1px solid #616475;\r\n        }\r\n    }\r\n    &__item:hover::after {\r\n        content: \">\";\r\n        position: absolute;\r\n        height: 48px;\r\n        right: 8px;\r\n        top: 10px;\r\n        opacity: 0.5;\r\n    }\r\n}\r\n",
+                    "styleUrl": "./search.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "weatherService",
+                        "type": "WeatherService"
+                    }
+                ],
+                "line": 13,
+                "jsdoctags": [
+                    {
+                        "name": "weatherService",
+                        "type": "WeatherService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class='search__container'>\n    <mat-icon class='search__close'>close</mat-icon>\n    <div class=\"search__search\">\n        <input [ngModel]='searchInput' name='searchInput' id='searchInput' class=\"search__search-input\"\n            placeholder=\"Search Input\" />\n        <div (click)='searchCity()' class=\"search__search-button\">Search</div>\n    </div>\n\n    <mat-list class='search__itemlist'>\n        <mat-list-item *ngFor='let city of cities' class='search__item'>London</mat-list-item>\n\n    </mat-list>\n\n\n</div>"
+        },
+        {
             "name": "ShortComponent",
-            "id": "component-ShortComponent-75b7ea5b54e184679a16cfa5fca7fa33",
+            "id": "component-ShortComponent-0437d072a770aa989ea7b3d0678f57d8",
             "file": "src/app/components/short/short.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -201,6 +463,11 @@
             "viewProviders": [],
             "inputsClass": [
                 {
+                    "name": "centigrades",
+                    "line": 12,
+                    "type": "boolean"
+                },
+                {
                     "name": "short",
                     "line": 11,
                     "type": "Short"
@@ -215,7 +482,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 14
+                    "line": 15
                 }
             ],
             "hostBindings": [],
@@ -223,11 +490,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { Short } from 'src/app/model/short.model';\n\n@Component({\n  selector: 'app-short',\n  templateUrl: './short.component.html',\n  styleUrls: ['./short.component.scss']\n})\nexport class ShortComponent implements OnInit {\n\n  @Input() short: Short\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { Short } from 'src/app/model/short.model';\n\n@Component({\n  selector: 'app-short',\n  templateUrl: './short.component.html',\n  styleUrls: ['./short.component.scss']\n})\nexport class ShortComponent implements OnInit {\n\n  @Input() short: Short\n  @Input() centigrades: boolean\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".short {\r\n    background-color: #1e213a;\r\n    width: 120px;\r\n    height: 177px;\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    color: #e7e7eb;\r\n\r\n    &__date,\r\n    &__range {\r\n        font-size: 16px;\r\n        line-height: 19px;\r\n    }\r\n    &__img {\r\n        width: 56.44px;\r\n        height: 62px;\r\n    }\r\n\r\n    &__range {\r\n        display: flex;\r\n        justify-content: space-around;\r\n        &-min {\r\n            color: #a09fb1;\r\n        }\r\n    }\r\n}\r\n",
+                    "data": ".short {\r\n    background-color: #1e213a;\r\n    width: 120px;\r\n    height: 177px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: space-around;\r\n    color: #e7e7eb;\r\n    padding-top: 5px;\r\n\r\n    &__date,\r\n    &__range {\r\n        font-size: 16px;\r\n        line-height: 19px;\r\n    }\r\n    &__img {\r\n        width: 56.44px;\r\n        height: 62px;\r\n    }\r\n\r\n    &__range {\r\n        display: flex;\r\n        flex-direction: row;\r\n        justify-content: space-around;\r\n        width: 100%;\r\n        &-min {\r\n            color: #a09fb1;\r\n        }\r\n    }\r\n}\r\n",
                     "styleUrl": "./short.component.scss"
                 }
             ],
@@ -236,12 +503,12 @@
                 "name": "constructor",
                 "description": "",
                 "args": [],
-                "line": 11
+                "line": 12
             },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div clas='short'>\n    <div class='short__date'>{{short.date}}</div>\n    <div class='short__img'>\n        <img src='../../../assets/img/{{short.img}}.png'>\n    </div>\n    <div class='short__range'>\n        <span>{{short.range.max}}</span>\n        <span class='short__range-min'>{{short.range.min}}</span>\n    </div>\n</div>"
+            "templateData": "<div class='short'>\n    <div class='short__date'>{{short.date === 'Tomorrow'? 'Tomorrow': short.date | date:['EEE, d LLL']}}</div>\n    <div>\n        <img class='short__img' src='../../../assets/img/{{short.img}}.png'>\n    </div>\n    <div class='short__range'>\n        <span>\n            {{ centigrades ? short.range.max : (short.range.max * (9/5) ) +32 }}° {{centigrades ? 'C':'F'}}</span>\n        <span class='short__range-min'>\n            {{ centigrades ? short.range.min : (short.range.min * (9/5) ) +32 }}° {{centigrades ? 'C':'F'}}\n        </span>\n    </div>\n</div>"
         }
     ],
     "modules": [
@@ -250,7 +517,11 @@
             "children": [
                 {
                     "type": "providers",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "WeatherService"
+                        }
+                    ]
                 },
                 {
                     "type": "declarations",
@@ -260,6 +531,12 @@
                         },
                         {
                             "name": "HighlightComponent"
+                        },
+                        {
+                            "name": "InfoComponent"
+                        },
+                        {
+                            "name": "SearchComponent"
                         },
                         {
                             "name": "ShortComponent"
@@ -325,12 +602,36 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "Centigrades",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/info/info.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Clear",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/short/short.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "components",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/component.ts",
                 "type": "[]",
-                "defaultValue": "[\r\n    HighlightComponent,\r\n    ShortComponent\r\n]"
+                "defaultValue": "[\r\n    HighlightComponent,\r\n    ShortComponent,\r\n    InfoComponent,\r\n    SearchComponent\r\n]"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/search/search.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "environment",
@@ -349,10 +650,58 @@
                 "defaultValue": "{\n  production: false\n}"
             },
             {
+                "name": "Fahrenheit",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/info/info.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Hail",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/short/short.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "HeavyCloud",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/short/short.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "HeavyRain",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/short/short.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "Humidity",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/components/highlight/highlight.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "LightCloud",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/short/short.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "LightRain",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/short/short.stories.ts",
                 "type": "",
                 "defaultValue": "Template.bind({})"
             },
@@ -373,6 +722,22 @@
                 "defaultValue": "Template.bind({})"
             },
             {
+                "name": "Showers",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/short/short.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Sleet",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/short/short.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "Snow",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -384,17 +749,49 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/short/short.stories.ts",
-                "type": "Story<ShortComponent>",
+                "file": "src/app/components/highlight/highlight.stories.ts",
+                "type": "Story<HighlightComponent>",
                 "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
             },
             {
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/highlight/highlight.stories.ts",
-                "type": "Story<HighlightComponent>",
+                "file": "src/app/components/info/info.stories.ts",
+                "type": "Story<InfoComponent>",
                 "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/search/search.stories.ts",
+                "type": "Story<SearchComponent>",
+                "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/short/short.stories.ts",
+                "type": "Story<ShortComponent>",
+                "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
+            },
+            {
+                "name": "Thunderstorm",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/short/short.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "URL",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/services/weather.service.ts",
+                "type": "string",
+                "defaultValue": "'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api'"
             },
             {
                 "name": "Visibility",
@@ -417,6 +814,122 @@
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
+            "src/app/components/info/info.stories.ts": [
+                {
+                    "name": "Centigrades",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/info/info.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Fahrenheit",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/info/info.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/info/info.stories.ts",
+                    "type": "Story<InfoComponent>",
+                    "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
+                }
+            ],
+            "src/app/components/short/short.stories.ts": [
+                {
+                    "name": "Clear",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/short/short.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Hail",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/short/short.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "HeavyCloud",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/short/short.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "HeavyRain",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/short/short.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "LightCloud",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/short/short.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "LightRain",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/short/short.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Showers",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/short/short.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Sleet",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/short/short.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Snow",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/short/short.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/short/short.stories.ts",
+                    "type": "Story<ShortComponent>",
+                    "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
+                },
+                {
+                    "name": "Thunderstorm",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/short/short.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                }
+            ],
             "src/app/component.ts": [
                 {
                     "name": "components",
@@ -424,7 +937,25 @@
                     "subtype": "variable",
                     "file": "src/app/component.ts",
                     "type": "[]",
-                    "defaultValue": "[\r\n    HighlightComponent,\r\n    ShortComponent\r\n]"
+                    "defaultValue": "[\r\n    HighlightComponent,\r\n    ShortComponent,\r\n    InfoComponent,\r\n    SearchComponent\r\n]"
+                }
+            ],
+            "src/app/components/search/search.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/search/search.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/search/search.stories.ts",
+                    "type": "Story<SearchComponent>",
+                    "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
                 }
             ],
             "src/environments/environment.prod.ts": [
@@ -499,22 +1030,14 @@
                     "defaultValue": "() => {\n    let storage = {};\n    return {\n      getItem: key => (key in storage ? storage[key] : null),\n      setItem: (key, value) => (storage[key] = value || ''),\n      removeItem: key => delete storage[key],\n      clear: () => (storage = {}),\n    };\n  }"
                 }
             ],
-            "src/app/components/short/short.stories.ts": [
+            "src/app/services/weather.service.ts": [
                 {
-                    "name": "Snow",
+                    "name": "URL",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/components/short/short.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/short/short.stories.ts",
-                    "type": "Story<ShortComponent>",
-                    "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
+                    "file": "src/app/services/weather.service.ts",
+                    "type": "string",
+                    "defaultValue": "'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api'"
                 }
             ]
         },
@@ -606,12 +1129,160 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/components/info/info.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "InfoComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/info/info.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Centigrades",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/info/info.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Fahrenheit",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/info/info.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/search/search.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SearchComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/search/search.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/search/search.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/components/short/short.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "ShortComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/4",
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/short/short.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Clear",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/short/short.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Hail",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/short/short.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "HeavyCloud",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/short/short.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "HeavyRain",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/short/short.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LightCloud",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/short/short.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LightRain",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/short/short.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Showers",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/short/short.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Sleet",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -635,6 +1306,16 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/components/short/short.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Thunderstorm",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/model/highlight.model.ts",
                 "type": "interface",
                 "linktype": "interface",
@@ -644,12 +1325,40 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/model/info.model.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Info",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/model/short.model.ts",
                 "type": "interface",
                 "linktype": "interface",
                 "name": "Short",
                 "coveragePercent": 0,
                 "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/services/weather.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "WeatherService",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/services/weather.service.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "URL",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {

@@ -1,0 +1,98 @@
+.info::after {
+    position: absolute;
+    content: "";
+    background-image: url(../../../assets/img/Cloud-background.png);
+    opacity: 0.1;
+    height: 100vh;
+    width: 659px;
+    top: 0;
+    z-index: 2;
+    background-position: left top;
+    background-repeat: repeat-x;
+    background-size: contain;
+}
+
+.info {
+    position: relative;
+    box-sizing: border-box;
+    background-color: #1e213a;
+    height: 100vh;
+    width: 459px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+
+    &__search {
+        position: absolute;
+        width: 85%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10;
+
+        &-button {
+            color: #e7e7eb;
+            font-size: 16px;
+            line-height: 19px;
+            background-color: #6e707a;
+            height: 40px;
+            width: 161px;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &-current {
+            background-color: #6e707a;
+            color: #e7e7eb;
+            cursor: pointer;
+        }
+    }
+    &__temperature {
+        font-size: 144px;
+        line-height: 169px;
+        color: #e7e7eb;
+        display: flex;
+        align-items: flex-end;
+        gap: 5px;
+        &-metric {
+            color: #88869d;
+            font-size: 50px;
+        }
+    }
+
+    &__weather {
+        color: #a09fb1;
+        font-size: 36px;
+        line-height: 42px;
+        font-weight: 600;
+    }
+
+    &__date {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        display: flex;
+        gap: 35px;
+        align-items: center;
+    }
+
+    &__ubication {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__footer {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        color: #88869d;
+    }
+}
