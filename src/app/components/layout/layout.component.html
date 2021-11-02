@@ -1,1 +1,43 @@
-<p>layout works!</p>
+<mat-sidenav-container class='layout__container'>
+    <mat-sidenav opened mode='side' class='layout__sidenav'>
+        <app-search *ngIf='searching' (onClose)="closeSearch()"></app-search>
+        <app-info *ngIf='!searching' [centigrades]='true' [info]='info' (onSearch)="search($event)"></app-info>
+    </mat-sidenav>
+    <mat-sidenav-content class='layout__content'>
+        <div class='layout__content-buttons'>
+            <span>°C</span>
+            <span>°F</span>
+        </div>
+
+
+        <div class='row layout__shorts'>
+            <div class='col'>
+                <app-short [short]='short' [centigrades]='true'></app-short>
+            </div>
+            <div class='col'>
+                <app-short [short]='short' [centigrades]='true'></app-short>
+            </div>
+            <div class='col'>
+                <app-short [short]='short' [centigrades]='true'></app-short>
+            </div>
+            <div class='col'>
+                <app-short [short]='short' [centigrades]='true'></app-short>
+            </div>
+            <div class='col'>
+                <app-short [short]='short' [centigrades]='true'></app-short>
+            </div>
+
+        </div>
+
+        <div class="layout__content-highlights row" style="width: 100%;">
+            <app-highlight class="col" [highlight]='highlight'></app-highlight>
+            <div class="col"></div>
+            <app-highlight class="col" [highlight]='highlight'></app-highlight>
+            <app-highlight class="col" [highlight]='highlight'></app-highlight>
+            <div class="col"></div>
+            <app-highlight class="col" [highlight]='highlight'></app-highlight>
+
+        </div>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

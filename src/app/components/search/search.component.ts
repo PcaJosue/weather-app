@@ -23,6 +23,7 @@ export class SearchComponent implements OnInit {
 
   searchCity() {
 
+    console.log('input', this.searchInput);
     this.cities = [];
     if (this.searchInput?.length === 0) {
       this.error = true;
