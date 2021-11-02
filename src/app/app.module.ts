@@ -8,6 +8,11 @@ import { components } from './component';
 import { HttpClientModule } from '@angular/common/http';
 import { WeatherService } from './services/weather.service';
 import { FormsModule } from '@angular/forms';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { WeatherState, WeatherStateModel } from './components/state/state';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,10 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxsModule.forRoot([WeatherState], { developmentMode: !environment.production }),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
 
   ],
   providers: [WeatherService],

@@ -1,11 +1,14 @@
+import { NgxsModule } from "@ngxs/store";
 import { Meta, moduleMetadata, Story } from "@storybook/angular";
+import { WeatherState } from "../state/state";
 import { ShortComponent } from "./short.component";
 
 export default {
     component: ShortComponent,
     decorators: [
         moduleMetadata({
-            declarations: [ShortComponent]
+            declarations: [ShortComponent],
+            imports: [NgxsModule.forRoot([WeatherState])]
         })
     ],
     excludeStories: /.*Data$/,
@@ -30,7 +33,7 @@ Snow.args = {
             max: 18
         }
     },
-    centigrades: true
+    centigrades$: true
 }
 
 
@@ -44,7 +47,7 @@ Sleet.args = {
             max: 18
         }
     },
-    centigrades: false
+    centigrades$: false
 }
 
 export const Hail = Template.bind({});
@@ -57,7 +60,7 @@ Hail.args = {
             max: 18
         }
     },
-    centigrades: true
+    centigrades$: true
 }
 
 export const Thunderstorm = Template.bind({});
@@ -70,7 +73,7 @@ Thunderstorm.args = {
             max: 18
         }
     },
-    centigrades: false
+    centigrades$: false
 }
 
 export const HeavyRain = Template.bind({});
@@ -83,7 +86,8 @@ HeavyRain.args = {
             max: 18
         }
     },
-    centigrades: true
+    centigrades$: true
+
 }
 
 export const LightRain = Template.bind({});
@@ -96,7 +100,7 @@ LightRain.args = {
             max: 18
         }
     },
-    centigrades: false
+    centigrades$: false
 }
 
 export const Showers = Template.bind({});
@@ -109,7 +113,7 @@ Showers.args = {
             max: 18
         }
     },
-    centigrades: false
+    centigrades$: false
 }
 
 export const HeavyCloud = Template.bind({});
@@ -122,7 +126,7 @@ HeavyCloud.args = {
             max: 18
         }
     },
-    centigrades: true
+    centigrades$: true
 }
 
 export const LightCloud = Template.bind({});
@@ -135,7 +139,7 @@ LightCloud.args = {
             max: 18
         }
     },
-    centigrades: false
+    centigrades$: false
 }
 
 export const Clear = Template.bind({});
@@ -148,5 +152,5 @@ Clear.args = {
             max: 18
         }
     },
-    centigrades: true
+    centigrades$: true
 }

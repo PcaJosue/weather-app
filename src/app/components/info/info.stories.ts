@@ -1,8 +1,10 @@
 import { HttpClientModule } from "@angular/common/http";
+import { NgxsModule } from "@ngxs/store";
 import { Meta, moduleMetadata, Story } from "@storybook/angular";
 import { components } from "src/app/component";
 import { MaterialModule } from "src/app/material.module";
 import { WeatherService } from "src/app/services/weather.service";
+import { WeatherState } from "../state/state";
 import { InfoComponent } from "./info.component";
 
 export default {
@@ -10,7 +12,7 @@ export default {
     decorators: [
         moduleMetadata({
             declarations: [InfoComponent],
-            imports: [MaterialModule, HttpClientModule],
+            imports: [MaterialModule, HttpClientModule, NgxsModule.forRoot([WeatherState])],
             providers: [WeatherService]
         })
     ],
@@ -38,15 +40,3 @@ Centigrades.args = {
     centigrades: true
 }
 
-
-export const Fahrenheit = Template.bind({});
-Fahrenheit.args = {
-    info: {
-        date: '2021-11-1',
-        img: 'Snow',
-        temperature: 15,
-        ubication: 'Helsinki',
-        weather: 'Shower'
-    },
-    centigrades: false
-}

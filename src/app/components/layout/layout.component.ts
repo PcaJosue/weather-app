@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { Highlight } from 'src/app/model/highlight.model';
 import { Info } from 'src/app/model/info.model';
 import { Short } from 'src/app/model/short.model';
+import { WeatherService } from 'src/app/services/weather.service';
+import { SetInfo, SetMetric } from '../state/actions';
+import { WeatherState, WeatherStateModel } from '../state/state';
 
 @Component({
   selector: 'app-layout',
@@ -10,53 +15,48 @@ import { Short } from 'src/app/model/short.model';
 })
 export class LayoutComponent implements OnInit {
 
+
+  @Select(WeatherState.getMetric) centigrades$: Observable<boolean>;
+  @Select(WeatherState.getShorts) shorts$: Observable<Short[]>;
+  @Select(WeatherState.getInfo) info$: Observable<Info>;
+  @Select(WeatherState.getHighlights) highlights$: Observable<Highlight[]>;
+
   searching: boolean = false;
-  info: Info = {
-    date: '2021-11-1',
-    img: 'Snow',
-    temperature: 15,
-    ubication: 'Helsinki',
-    weather: 'Shower'
-  }
-  highlight: Highlight = {
-    description: 'Wind status',
-    info: { value: 7, metric: 'mph' },
-    graphic: {
-      icon: 'arrow_drop_down',
-      label: 'WSW',
-      type: 'wind'
-    }
+  loading: boolean = true;
 
-  }
-
-  short: Short = {
-
-    date: 'Tomorrow',
-    img: 'Snow',
-    range: {
-      min: 11,
-      max: 18
-    }
-
-  }
-
-
-
-  constructor() { }
+  constructor(private store: Store, private weatherService: WeatherService) { }
 
   ngOnInit(): void {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      try {
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;
+        const data = await this.weatherService.searchMyLocation(lat, long).toPromise();
+        const info = await this.weatherService.getInfo(data[0].woeid).toPromise();
+        this.store.dispatch(new SetInfo(info))
+        this.loading = false;
+      } catch (error) { }
+    }, async (error) => {
+
+      try {
+        const info = await this.weatherService.getInfo(44418).toPromise();
+        this.store.dispatch(new SetInfo(info))
+        this.loading = false
+      } catch (error) { throw error }
+    });
+
   }
 
-  close() {
-
-  }
 
   closeSearch() {
     this.searching = false;
   }
 
   search(event) {
-    console.log('event', event);
     this.searching = true;
+  }
+
+  changeMetric(metric) {
+    this.store.dispatch(new SetMetric(metric === "C"))
   }
 }

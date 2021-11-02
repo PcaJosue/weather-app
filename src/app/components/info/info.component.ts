@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { Info } from 'src/app/model/info.model';
 import { WeatherService } from 'src/app/services/weather.service';
+import { SetInfo } from '../state/actions';
+import { WeatherState } from '../state/state';
 
 @Component({
   selector: 'app-info',
@@ -10,22 +14,25 @@ import { WeatherService } from 'src/app/services/weather.service';
 export class InfoComponent implements OnInit {
 
 
-  @Input() centigrades: boolean;
+  @Select(WeatherState.getMetric) centigrades$: Observable<boolean>
   @Input() info: Info;
   @Output() onSearch = new EventEmitter<boolean>();
-  constructor(private weatherService: WeatherService) { }
+  constructor(private weatherService: WeatherService,
+    private store: Store) { }
 
   ngOnInit(): void {
   }
 
   searchMyLocation() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const lat = position.coords.latitude;
-      const long = position.coords.longitude;
-      this.weatherService.searchMyLocation(lat, long).subscribe(data => {
-        console.log('my location', data);
-      })
 
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      try {
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;
+        const data = await this.weatherService.searchMyLocation(lat, long).toPromise();
+        const info = await this.weatherService.getInfo(data[0].woeid).toPromise();
+        this.store.dispatch(new SetInfo(info))
+      } catch (error) { throw error }
     });
 
   }

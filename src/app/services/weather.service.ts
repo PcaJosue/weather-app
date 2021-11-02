@@ -19,4 +19,8 @@ export class WeatherService {
   searchMyLocation(lat, long) {
     return this.http.get(`${URL}/location/search/?lattlong=${lat},${long}`)
   }
+
+  getInfo(woeid) {
+    return this.http.get(`${URL}/location/${woeid}`)
+  }
 }

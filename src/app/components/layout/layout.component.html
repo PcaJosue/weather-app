@@ -1,43 +1,53 @@
-<mat-sidenav-container class='layout__container'>
-    <mat-sidenav opened mode='side' class='layout__sidenav'>
+<div class="layout__container " *ngIf='!loading'>
+    <div class="layout__sidenav ">
         <app-search *ngIf='searching' (onClose)="closeSearch()"></app-search>
-        <app-info *ngIf='!searching' [centigrades]='true' [info]='info' (onSearch)="search($event)"></app-info>
-    </mat-sidenav>
-    <mat-sidenav-content class='layout__content'>
+        <app-info *ngIf='!searching' [info]='info$ | async' (onSearch)="search($event)"></app-info>
+    </div>
+    <div class="layout__content">
+
         <div class='layout__content-buttons'>
-            <span>°C</span>
-            <span>°F</span>
+            <span [class]='(centigrades$ |async)? "active":""' (click)="changeMetric('C')">°C</span>
+            <span [class]='!(centigrades$ | async )? "active":""' (click)="changeMetric('F')">°F</span>
         </div>
 
 
-        <div class='row layout__shorts'>
+        <div class='row layout__content__shorts'>
             <div class='col'>
-                <app-short [short]='short' [centigrades]='true'></app-short>
+                <app-short [short]='(shorts$|async)[0]'></app-short>
             </div>
             <div class='col'>
-                <app-short [short]='short' [centigrades]='true'></app-short>
+                <app-short [short]='(shorts$|async)[1]'></app-short>
             </div>
             <div class='col'>
-                <app-short [short]='short' [centigrades]='true'></app-short>
+                <app-short [short]='(shorts$|async)[2]'></app-short>
             </div>
             <div class='col'>
-                <app-short [short]='short' [centigrades]='true'></app-short>
+                <app-short [short]='(shorts$|async)[3]'></app-short>
             </div>
             <div class='col'>
-                <app-short [short]='short' [centigrades]='true'></app-short>
+                <app-short [short]='(shorts$|async)[4]'></app-short>
             </div>
 
         </div>
 
-        <div class="layout__content-highlights row" style="width: 100%;">
-            <app-highlight class="col" [highlight]='highlight'></app-highlight>
-            <div class="col"></div>
-            <app-highlight class="col" [highlight]='highlight'></app-highlight>
-            <app-highlight class="col" [highlight]='highlight'></app-highlight>
-            <div class="col"></div>
-            <app-highlight class="col" [highlight]='highlight'></app-highlight>
+        <div class="layout__content-highlights-title">
+            Today's Highlights
+        </div>
+
+        <div class="layout__content-highlights row" style="width: 103%;">
+            <app-highlight class="col" [highlight]='(highlights$|async)[0]'></app-highlight>
+            <app-highlight class="col" [highlight]='(highlights$|async)[1]'></app-highlight>
+            <app-highlight class="col" [highlight]='(highlights$|async)[2]'></app-highlight>
+            <app-highlight class="col" [highlight]='(highlights$|async)[3]'></app-highlight>
 
         </div>
 
-    </mat-sidenav-content>
-</mat-sidenav-container>
+        <div class="layout__content-footer">
+            created by PcaJosue - devChallenges.io
+        </div>
+    </div>
+</div>
+
+<div class='layout__loading' *ngIf='loading'>
+    <mat-spinner></mat-spinner>
+</div>

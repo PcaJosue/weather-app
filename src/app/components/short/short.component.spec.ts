@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgxsModule } from '@ngxs/store';
+import { WeatherState } from '../state/state';
 
 import { ShortComponent } from './short.component';
 
@@ -8,7 +10,8 @@ describe('ShortComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ShortComponent]
+      declarations: [ShortComponent],
+      imports: [NgxsModule.forRoot([WeatherState])]
     })
       .compileComponents();
   });
@@ -16,7 +19,6 @@ describe('ShortComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ShortComponent);
     component = fixture.componentInstance;
-    component.centigrades = true;
     component.short = {
       date: 'Tomorrow',
       img: 'Snow',
@@ -46,12 +48,6 @@ describe('ShortComponent', () => {
     expect(date.textContent).toEqual('Sun, 31 Oct')
   });
 
-  it('should transform to F', () => {
-    component.centigrades = false;
-    let min = fixture.nativeElement.querySelector('.short__range-min');
-    fixture.detectChanges();
-    expect(min.textContent.trim()).toEqual('51.8° F')
-  });
 
 
 

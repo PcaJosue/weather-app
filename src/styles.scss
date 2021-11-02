@@ -1,4 +1,10 @@
 @import url(./assets/css/bootstrap-grid.min.css);
 body {
     font-family: "raleway";
+    margin: 0;
+    width: 100vw;
+}
+
+.row {
+    margin: 0 !important;
 }

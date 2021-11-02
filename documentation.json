@@ -82,6 +82,46 @@
             "methods": []
         },
         {
+            "name": "Location",
+            "id": "interface-Location-8c3e32ff9d9468aa0daa6caf54e81fda",
+            "file": "src/app/model/search.mode.ts",
+            "type": "interface",
+            "sourceCode": "export interface Location {\r\n    title: string;\r\n    location_type: string;\r\n    latt_long: string;\r\n    woeid: number\r\n}",
+            "properties": [
+                {
+                    "name": "latt_long",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "location_type",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                },
+                {
+                    "name": "title",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "woeid",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 150,
+            "methods": []
+        },
+        {
             "name": "Short",
             "id": "interface-Short-4be4f3bec68038b0fb9828f5af42fa04",
             "file": "src/app/model/short.model.ts",
@@ -118,7 +158,7 @@
     "injectables": [
         {
             "name": "WeatherService",
-            "id": "injectable-WeatherService-2a9db55e3e42cddf9305dd509ae240e9",
+            "id": "injectable-WeatherService-1711b4840d4806f2b9ec2852a1df5346",
             "file": "src/app/services/weather.service.ts",
             "properties": [],
             "methods": [
@@ -143,10 +183,43 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "searchMyLocation",
+                    "args": [
+                        {
+                            "name": "lat",
+                            "type": ""
+                        },
+                        {
+                            "name": "long",
+                            "type": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 19,
+                    "jsdoctags": [
+                        {
+                            "name": "lat",
+                            "type": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "long",
+                            "type": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "description": "",
-            "sourceCode": "import { HttpClient, HttpHeaders } from '@angular/common/http';\nimport { Injectable } from '@angular/core';\n\nconst URL = 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api';\n\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class WeatherService {\n\n  constructor(private http: HttpClient) { }\n\n\n  searchLocation(location: string) {\n    return this.http.get(`${URL}/location/search/?query=${location}`, { responseType: 'json' })\n  }\n}\n",
+            "sourceCode": "import { HttpClient, HttpHeaders } from '@angular/common/http';\nimport { Injectable } from '@angular/core';\n\nconst URL = 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api';\n\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class WeatherService {\n\n  constructor(private http: HttpClient) { }\n\n\n  searchLocation(location: string) {\n    return this.http.get(`${URL}/location/search/?query=${location}`, { responseType: 'json' })\n  }\n\n  searchMyLocation(lat, long) {\n    return this.http.get(`${URL}/location/search/?lattlong=${lat},${long}`)\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -170,7 +243,185 @@
             "type": "injectable"
         }
     ],
-    "classes": [],
+    "classes": [
+        {
+            "name": "SetMetric",
+            "id": "class-SetMetric-45835ddc14016549d54f427e7cb7491d",
+            "file": "src/app/components/state/actions.ts",
+            "type": "class",
+            "sourceCode": "export const actions = {\r\n    SET_METRIC: 'SET_METRIC'\r\n}\r\n\r\n\r\nexport class SetMetric {\r\n    static readonly type = actions.SET_METRIC;\r\n    constructor(public payload: boolean) { }\r\n}\r\n\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "payload",
+                        "type": "boolean"
+                    }
+                ],
+                "line": 7,
+                "jsdoctags": [
+                    {
+                        "name": "payload",
+                        "type": "boolean",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "properties": [
+                {
+                    "name": "payload",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "type",
+                    "defaultValue": "actions.SET_METRIC",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 7,
+                    "modifierKind": [
+                        115,
+                        132
+                    ]
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
+            "name": "WeatherState",
+            "id": "class-WeatherState-2e1e9592d398b165dd8c6da1a4330426",
+            "file": "src/app/components/state/state.ts",
+            "type": "class",
+            "sourceCode": "import { Highlight } from \"src/app/model/highlight.model\";\r\nimport { Info } from \"src/app/model/info.model\";\r\nimport { Short } from \"src/app/model/short.model\";\r\nimport { State, Selector, Action, StateContext, Actions } from '@ngxs/store';\r\nimport { SetMetric } from \"./actions\";\r\n\r\nexport class WeatherStateModel {\r\n    centigrades: boolean;\r\n    shorts: Short[];\r\n    highlight: Highlight[];\r\n    info: Info\r\n\r\n}\r\n\r\n@State<WeatherStateModel>({\r\n    name: 'weather',\r\n    defaults: {\r\n        centigrades: true,\r\n        shorts: null,\r\n        highlight: null,\r\n        info: null\r\n    }\r\n})\r\nexport class WeatherState {\r\n    @Selector()\r\n    static getMetric(state: WeatherStateModel) {\r\n        return state.centigrades;\r\n    }\r\n\r\n    @Action(SetMetric)\r\n    setMetric({ patchState, getState }: StateContext<WeatherStateModel>, { payload }: SetMetric) {\r\n        patchState({\r\n            ...getState(),\r\n            centigrades: payload\r\n        })\r\n    }\r\n}\r\n",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "getMetric",
+                    "args": [
+                        {
+                            "name": "state",
+                            "type": "WeatherStateModel"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 26,
+                    "decorators": [
+                        {
+                            "name": "Selector",
+                            "stringifiedArguments": ""
+                        }
+                    ],
+                    "modifierKind": [
+                        115
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "state",
+                            "type": "WeatherStateModel",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "setMetric",
+                    "args": [
+                        {
+                            "type": "StateContext<WeatherStateModel>"
+                        },
+                        {
+                            "type": "SetMetric"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31,
+                    "decorators": [
+                        {
+                            "name": "Action",
+                            "stringifiedArguments": "SetMetric"
+                        }
+                    ],
+                    "jsdoctags": [
+                        {
+                            "type": "StateContext<WeatherStateModel>",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "type": "SetMetric",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "indexSignatures": []
+        },
+        {
+            "name": "WeatherStateModel",
+            "id": "class-WeatherStateModel-2e1e9592d398b165dd8c6da1a4330426",
+            "file": "src/app/components/state/state.ts",
+            "type": "class",
+            "sourceCode": "import { Highlight } from \"src/app/model/highlight.model\";\r\nimport { Info } from \"src/app/model/info.model\";\r\nimport { Short } from \"src/app/model/short.model\";\r\nimport { State, Selector, Action, StateContext, Actions } from '@ngxs/store';\r\nimport { SetMetric } from \"./actions\";\r\n\r\nexport class WeatherStateModel {\r\n    centigrades: boolean;\r\n    shorts: Short[];\r\n    highlight: Highlight[];\r\n    info: Info\r\n\r\n}\r\n\r\n@State<WeatherStateModel>({\r\n    name: 'weather',\r\n    defaults: {\r\n        centigrades: true,\r\n        shorts: null,\r\n        highlight: null,\r\n        info: null\r\n    }\r\n})\r\nexport class WeatherState {\r\n    @Selector()\r\n    static getMetric(state: WeatherStateModel) {\r\n        return state.centigrades;\r\n    }\r\n\r\n    @Action(SetMetric)\r\n    setMetric({ patchState, getState }: StateContext<WeatherStateModel>, { payload }: SetMetric) {\r\n        patchState({\r\n            ...getState(),\r\n            centigrades: payload\r\n        })\r\n    }\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "centigrades",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "highlight",
+                    "type": "Highlight[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "info",
+                    "type": "Info",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "shorts",
+                    "type": "Short[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        }
+    ],
     "directives": [],
     "components": [
         {
@@ -218,7 +469,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<app-search></app-search>"
+            "templateData": "<app-layout></app-layout>"
         },
         {
             "name": "HighlightComponent",
@@ -284,7 +535,7 @@
         },
         {
             "name": "InfoComponent",
-            "id": "component-InfoComponent-66debab3487b1252bf63415b28758b0e",
+            "id": "component-InfoComponent-c146883ee1cd7e7d9f233e451c4476d0",
             "file": "src/app/components/info/info.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -303,16 +554,23 @@
             "inputsClass": [
                 {
                     "name": "centigrades",
-                    "line": 12,
+                    "line": 13,
                     "type": "boolean"
                 },
                 {
                     "name": "info",
-                    "line": 13,
+                    "line": 14,
                     "type": "Info"
                 }
             ],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "onSearch",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "line": 15,
+                    "type": "EventEmitter"
+                }
+            ],
             "propertiesClass": [],
             "methodsClass": [
                 {
@@ -321,7 +579,23 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 16
+                    "line": 18
+                },
+                {
+                    "name": "search",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 33
+                },
+                {
+                    "name": "searchMyLocation",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 21
                 }
             ],
             "hostBindings": [],
@@ -329,11 +603,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { Info } from 'src/app/model/info.model';\n\n@Component({\n  selector: 'app-info',\n  templateUrl: './info.component.html',\n  styleUrls: ['./info.component.scss']\n})\nexport class InfoComponent implements OnInit {\n\n\n  @Input() centigrades: boolean;\n  @Input() info: Info;\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\nimport { Info } from 'src/app/model/info.model';\nimport { WeatherService } from 'src/app/services/weather.service';\n\n@Component({\n  selector: 'app-info',\n  templateUrl: './info.component.html',\n  styleUrls: ['./info.component.scss']\n})\nexport class InfoComponent implements OnInit {\n\n\n  @Input() centigrades: boolean;\n  @Input() info: Info;\n  @Output() onSearch = new EventEmitter<boolean>();\n  constructor(private weatherService: WeatherService) { }\n\n  ngOnInit(): void {\n  }\n\n  searchMyLocation() {\n    navigator.geolocation.getCurrentPosition((position) => {\n      const lat = position.coords.latitude;\n      const long = position.coords.longitude;\n      this.weatherService.searchMyLocation(lat, long).subscribe(data => {\n        console.log('my location', data);\n      })\n\n    });\n\n  }\n\n  search() {\n    this.onSearch.emit(true);\n  }\n\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".info::after {\r\n    position: absolute;\r\n    content: \"\";\r\n    background-image: url(../../../assets/img/Cloud-background.png);\r\n    opacity: 0.1;\r\n    height: 100vh;\r\n    width: 659px;\r\n    top: 0;\r\n    z-index: 2;\r\n    background-position: left top;\r\n    background-repeat: repeat-x;\r\n    background-size: contain;\r\n}\r\n\r\n.info {\r\n    position: relative;\r\n    box-sizing: border-box;\r\n    background-color: #1e213a;\r\n    height: 100vh;\r\n    width: 459px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 2rem;\r\n\r\n    &__search {\r\n        position: absolute;\r\n        width: 85%;\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-items: center;\r\n        z-index: 10;\r\n\r\n        &-button {\r\n            color: #e7e7eb;\r\n            font-size: 16px;\r\n            line-height: 19px;\r\n            background-color: #6e707a;\r\n            height: 40px;\r\n            width: 161px;\r\n            text-align: center;\r\n            cursor: pointer;\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n        }\r\n\r\n        &-current {\r\n            background-color: #6e707a;\r\n            color: #e7e7eb;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n    &__temperature {\r\n        font-size: 144px;\r\n        line-height: 169px;\r\n        color: #e7e7eb;\r\n        display: flex;\r\n        align-items: flex-end;\r\n        gap: 5px;\r\n        &-metric {\r\n            color: #88869d;\r\n            font-size: 50px;\r\n        }\r\n    }\r\n\r\n    &__weather {\r\n        color: #a09fb1;\r\n        font-size: 36px;\r\n        line-height: 42px;\r\n        font-weight: 600;\r\n    }\r\n\r\n    &__date {\r\n        font-style: normal;\r\n        font-weight: 500;\r\n        font-size: 18px;\r\n        line-height: 21px;\r\n        display: flex;\r\n        gap: 35px;\r\n        align-items: center;\r\n    }\r\n\r\n    &__ubication {\r\n        display: flex;\r\n        gap: 20px;\r\n        justify-content: center;\r\n        align-items: center;\r\n    }\r\n\r\n    &__footer {\r\n        display: flex;\r\n        flex-direction: column;\r\n        gap: 15px;\r\n        color: #88869d;\r\n    }\r\n}\r\n",
+                    "data": ".info::after {\r\n    position: absolute;\r\n    content: \"\";\r\n    background-image: url(../../../assets/img/Cloud-background.png);\r\n    opacity: 0.1;\r\n    height: 100%;\r\n    width: 100%;\r\n    top: 0;\r\n    z-index: 0;\r\n    background-position: left top;\r\n    background-repeat: repeat-x;\r\n    background-size: 120%;\r\n}\r\n\r\n.info {\r\n    position: relative;\r\n    box-sizing: border-box;\r\n    background-color: #1e213a;\r\n    height: 100%;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 2rem;\r\n\r\n    &__search {\r\n        position: absolute;\r\n        width: 85%;\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-items: center;\r\n        z-index: 10;\r\n\r\n        &-button {\r\n            color: #e7e7eb;\r\n            font-size: 16px;\r\n            line-height: 19px;\r\n            background-color: #6e707a;\r\n            height: 40px;\r\n            width: 161px;\r\n            text-align: center;\r\n            cursor: pointer;\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n        }\r\n\r\n        &-current {\r\n            background-color: #6e707a;\r\n            color: #e7e7eb;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n    &__temperature {\r\n        font-size: 144px;\r\n        line-height: 169px;\r\n        color: #e7e7eb;\r\n        display: flex;\r\n        align-items: flex-end;\r\n        gap: 5px;\r\n        &-metric {\r\n            color: #88869d;\r\n            font-size: 50px;\r\n        }\r\n    }\r\n\r\n    &__weather {\r\n        color: #a09fb1;\r\n        font-size: 36px;\r\n        line-height: 42px;\r\n        font-weight: 600;\r\n    }\r\n\r\n    &__date {\r\n        font-style: normal;\r\n        font-weight: 500;\r\n        font-size: 18px;\r\n        line-height: 21px;\r\n        display: flex;\r\n        gap: 35px;\r\n        align-items: center;\r\n    }\r\n\r\n    &__ubication {\r\n        display: flex;\r\n        gap: 20px;\r\n        justify-content: center;\r\n        align-items: center;\r\n    }\r\n\r\n    &__footer {\r\n        display: flex;\r\n        flex-direction: column;\r\n        gap: 15px;\r\n        color: #88869d;\r\n    }\r\n}\r\n",
                     "styleUrl": "./info.component.scss"
                 }
             ],
@@ -341,17 +615,207 @@
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
-                "args": [],
-                "line": 13
+                "args": [
+                    {
+                        "name": "weatherService",
+                        "type": "WeatherService"
+                    }
+                ],
+                "line": 15,
+                "jsdoctags": [
+                    {
+                        "name": "weatherService",
+                        "type": "WeatherService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
             },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"info\">\n    <div class=\"info__search\">\n        <div class='info__search-button'><span>Search for places</span></div>\n        <mat-icon class='info__search-current'>my_location</mat-icon>\n    </div>\n    <img class='info__img' src='../../../assets/img/{{info.img}}.png'>\n    <div class=\"info__temperature\">\n        <span class='info__temperature-value'>{{ centigrades ? info.temperature : (info.temperature * (9/5) ) +32\n            }}</span>\n        <span class='info__temperature-metric'> ° {{centigrades ? 'C':'F'}}</span>\n    </div>\n    <div class=\"info__weather\">{{info.weather}}</div>\n\n    <div class='info__footer'>\n        <div class=\"info__date\">\n            <span>Today</span>\n            <span>.</span>\n            <span>{{info.date | date:['EEE, d LLL']}}</span>\n        </div>\n        <div class=\"info__ubication\">\n            <mat-icon>place</mat-icon>\n            <span>{{info.ubication}}</span>\n        </div>\n    </div>\n</div>"
+            "templateData": "<div class=\"info\">\n    <div class=\"info__search\">\n        <div class='info__search-button' (click)='search()'><span>Search for places</span></div>\n        <mat-icon class='info__search-current' (click)='searchMyLocation()'>my_location</mat-icon>\n    </div>\n    <img class='info__img' src='../../../assets/img/{{info.img}}.png'>\n    <div class=\"info__temperature\">\n        <span class='info__temperature-value'>{{ centigrades ? info.temperature : (info.temperature * (9/5) ) +32\n            }}</span>\n        <span class='info__temperature-metric'> ° {{centigrades ? 'C':'F'}}</span>\n    </div>\n    <div class=\"info__weather\">{{info.weather}}</div>\n\n    <div class='info__footer'>\n        <div class=\"info__date\">\n            <span>Today</span>\n            <span>.</span>\n            <span>{{info.date | date:['EEE, d LLL']}}</span>\n        </div>\n        <div class=\"info__ubication\">\n            <mat-icon>place</mat-icon>\n            <span>{{info.ubication}}</span>\n        </div>\n    </div>\n</div>"
+        },
+        {
+            "name": "LayoutComponent",
+            "id": "component-LayoutComponent-e07c25d7ac9788a53b96122c6c396fc1",
+            "file": "src/app/components/layout/layout.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-layout",
+            "styleUrls": [
+                "./layout.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./layout.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "centigrades",
+                    "defaultValue": "true",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "centigrades$",
+                    "type": "Observable<boolean>",
+                    "optional": false,
+                    "description": "",
+                    "line": 18,
+                    "decorators": [
+                        {
+                            "name": "Select",
+                            "stringifiedArguments": "WeatherState.getMetric"
+                        }
+                    ]
+                },
+                {
+                    "name": "highlight",
+                    "defaultValue": "{\n    description: 'Wind status',\n    info: { value: 7, metric: 'mph' },\n    graphic: {\n      icon: 'arrow_drop_down',\n      label: 'WSW',\n      type: 'wind'\n    }\n\n  }",
+                    "type": "Highlight",
+                    "optional": false,
+                    "description": "",
+                    "line": 29
+                },
+                {
+                    "name": "info",
+                    "defaultValue": "{\n    date: '2021-11-1',\n    img: 'Snow',\n    temperature: 15,\n    ubication: 'Helsinki',\n    weather: 'Shower'\n  }",
+                    "type": "Info",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "searching",
+                    "defaultValue": "false",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                },
+                {
+                    "name": "short",
+                    "defaultValue": "{\n\n    date: 'Tomorrow',\n    img: 'Snow',\n    range: {\n      min: 11,\n      max: 18\n    }\n\n  }",
+                    "type": "Short",
+                    "optional": false,
+                    "description": "",
+                    "line": 40
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "changeMetric",
+                    "args": [
+                        {
+                            "name": "metric",
+                            "type": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 68,
+                    "jsdoctags": [
+                        {
+                            "name": "metric",
+                            "type": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "closeSearch",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 60
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 57
+                },
+                {
+                    "name": "search",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 64,
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Select, Store } from '@ngxs/store';\nimport { Observable } from 'rxjs';\nimport { Highlight } from 'src/app/model/highlight.model';\nimport { Info } from 'src/app/model/info.model';\nimport { Short } from 'src/app/model/short.model';\nimport { SetMetric } from '../state/actions';\nimport { WeatherState } from '../state/state';\n\n@Component({\n  selector: 'app-layout',\n  templateUrl: './layout.component.html',\n  styleUrls: ['./layout.component.scss']\n})\nexport class LayoutComponent implements OnInit {\n\n\n  @Select(WeatherState.getMetric) centigrades$: Observable<boolean>;\n\n  centigrades: boolean = true;\n  searching: boolean = false;\n  info: Info = {\n    date: '2021-11-1',\n    img: 'Snow',\n    temperature: 15,\n    ubication: 'Helsinki',\n    weather: 'Shower'\n  }\n  highlight: Highlight = {\n    description: 'Wind status',\n    info: { value: 7, metric: 'mph' },\n    graphic: {\n      icon: 'arrow_drop_down',\n      label: 'WSW',\n      type: 'wind'\n    }\n\n  }\n\n  short: Short = {\n\n    date: 'Tomorrow',\n    img: 'Snow',\n    range: {\n      min: 11,\n      max: 18\n    }\n\n  }\n\n\n\n  constructor(private store: Store) {\n    console.log('store', this.store.snapshot());\n  }\n\n  ngOnInit(): void {\n  }\n\n  closeSearch() {\n    this.searching = false;\n  }\n\n  search(event) {\n    this.searching = true;\n  }\n\n  changeMetric(metric) {\n    this.store.dispatch(new SetMetric(metric === \"C\"))\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".layout {\r\n    &__container {\r\n        width: 100%;\r\n    }\r\n\r\n    &__sidenav {\r\n        width: 100%;\r\n        padding: 0;\r\n    }\r\n\r\n    &__content {\r\n        box-sizing: border-box;\r\n        background-color: #100e1d;\r\n        padding: 1.5rem 10rem;\r\n        color: #a09fb1;\r\n\r\n        &-buttons {\r\n            display: flex;\r\n            justify-content: end;\r\n            gap: 10px;\r\n            margin-bottom: 3rem;\r\n            cursor: pointer;\r\n            span {\r\n                text-align: center;\r\n                background-color: #585676;\r\n                color: #e7e7eb;\r\n                line-height: 21px;\r\n                font-size: 18px;\r\n                font-weight: bold;\r\n                padding: 5px;\r\n                border-radius: 50%;\r\n                &.active {\r\n                    background-color: #e7e7eb;\r\n                    color: #110e3c;\r\n                }\r\n            }\r\n        }\r\n        &__shorts {\r\n            .col {\r\n                margin-top: 2rem;\r\n            }\r\n        }\r\n        &-highlights {\r\n            &-title {\r\n                color: #e7e7eb;\r\n                font-style: normal;\r\n                font-weight: bold;\r\n                font-size: 24px;\r\n                line-height: 28px;\r\n                margin-top: 3rem;\r\n            }\r\n            .col {\r\n                margin-top: 2.5rem;\r\n            }\r\n        }\r\n\r\n        &-footer {\r\n            font-weight: 500;\r\n            font-size: 14px;\r\n            line-height: 17px;\r\n            text-align: center;\r\n            color: #a09fb1;\r\n            margin-top: 5rem;\r\n        }\r\n    }\r\n}\r\n",
+                    "styleUrl": "./layout.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "store",
+                        "type": "Store"
+                    }
+                ],
+                "line": 49,
+                "jsdoctags": [
+                    {
+                        "name": "store",
+                        "type": "Store",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"layout__container row\">\n    <div class=\"layout__sidenav col-md-3\">\n        <app-search *ngIf='searching' (onClose)=\"closeSearch()\"></app-search>\n        <app-info *ngIf='!searching' [centigrades]='true' [info]='info' (onSearch)=\"search($event)\"></app-info>\n    </div>\n    <div class=\"layout__content col-md-9\">\n\n        <div class='layout__content-buttons'>\n            <span [class]='(centigrades$ |async)? \"active\":\"\"' (click)=\"changeMetric('C')\">°C</span>\n            <span [class]='(!centigrades$ | async )? \"active\":\"\"' (click)=\"changeMetric('F')\">°F</span>\n        </div>\n\n\n        <div class='row layout__content__shorts'>\n            <div class='col'>\n                <app-short [short]='short' [centigrades]='true'></app-short>\n            </div>\n            <div class='col'>\n                <app-short [short]='short' [centigrades]='true'></app-short>\n            </div>\n            <div class='col'>\n                <app-short [short]='short' [centigrades]='true'></app-short>\n            </div>\n            <div class='col'>\n                <app-short [short]='short' [centigrades]='true'></app-short>\n            </div>\n            <div class='col'>\n                <app-short [short]='short' [centigrades]='true'></app-short>\n            </div>\n\n        </div>\n\n        <div class=\"layout__content-highlights-title\">\n            Today's Highlights\n        </div>\n\n        <div class=\"layout__content-highlights row\" style=\"width: 103%;\">\n            <app-highlight class=\"col\" [highlight]='highlight'></app-highlight>\n            <app-highlight class=\"col\" [highlight]='highlight'></app-highlight>\n            <app-highlight class=\"col\" [highlight]='highlight'></app-highlight>\n            <app-highlight class=\"col\" [highlight]='highlight'></app-highlight>\n\n        </div>\n\n        <div class=\"layout__content-footer\">\n            created by PcaJosue - devChallenges.io\n        </div>\n    </div>\n</div>"
         },
         {
             "name": "SearchComponent",
-            "id": "component-SearchComponent-62c15cf108e69033378b102b6ab584c5",
+            "id": "component-SearchComponent-a4ba07fcbf0707f48a436c659a94f7d8",
             "file": "src/app/components/search/search.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -368,14 +832,29 @@
             ],
             "viewProviders": [],
             "inputsClass": [],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "onClose",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "line": 16,
+                    "type": "EventEmitter"
+                }
+            ],
             "propertiesClass": [
                 {
                     "name": "cities",
-                    "type": "",
+                    "type": "Location[]",
                     "optional": false,
                     "description": "",
                     "line": 13
+                },
+                {
+                    "name": "error",
+                    "defaultValue": "false",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
                 },
                 {
                     "name": "searchInput",
@@ -388,12 +867,20 @@
             ],
             "methodsClass": [
                 {
+                    "name": "close",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 39
+                },
+                {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 18
+                    "line": 21
                 },
                 {
                     "name": "searchCity",
@@ -401,7 +888,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 21
+                    "line": 24
                 }
             ],
             "hostBindings": [],
@@ -409,11 +896,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormControl } from '@angular/forms';\nimport { WeatherService } from 'src/app/services/weather.service';\n\n@Component({\n  selector: 'app-search',\n  templateUrl: './search.component.html',\n  styleUrls: ['./search.component.scss']\n})\nexport class SearchComponent implements OnInit {\n\n  searchInput = '';\n  cities;\n\n\n  constructor(private weatherService: WeatherService) { }\n\n  ngOnInit(): void {\n  }\n\n  searchCity() {\n    this.weatherService.searchLocation(this.searchInput).subscribe(data => {\n      console.log('data', data);\n    })\n  }\n\n}\n",
+            "sourceCode": "import { Component, EventEmitter, OnInit, Output } from '@angular/core';\nimport { Location } from 'src/app/model/search.mode';\nimport { WeatherService } from 'src/app/services/weather.service';\n\n@Component({\n  selector: 'app-search',\n  templateUrl: './search.component.html',\n  styleUrls: ['./search.component.scss']\n})\nexport class SearchComponent implements OnInit {\n\n  searchInput: string = '';\n  cities: Location[];\n  error: boolean = false;\n\n  @Output() onClose = new EventEmitter<boolean>();;\n\n\n  constructor(private weatherService: WeatherService) { }\n\n  ngOnInit(): void {\n  }\n\n  searchCity() {\n\n    console.log('input', this.searchInput);\n    this.cities = [];\n    if (this.searchInput?.length === 0) {\n      this.error = true;\n      return;\n    }\n\n    this.error = false;\n    this.weatherService.searchLocation(this.searchInput).subscribe((data: Location[]) => {\n      this.cities = data;\n    })\n  }\n\n  close() {\n    this.onClose.emit(true);\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".search {\r\n    &__container {\r\n        background-color: #1e213a;\r\n        width: 459px;\r\n        height: 100vh;\r\n        display: flex;\r\n        flex-direction: column;\r\n        gap: 1rem;\r\n        color: #e7e7eb;\r\n        padding: 1.5rem;\r\n    }\r\n    &__close {\r\n        align-self: end;\r\n        padding: 1rem;\r\n        cursor: pointer;\r\n    }\r\n\r\n    &__search {\r\n        width: 100%;\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-self: center;\r\n        position: relative;\r\n\r\n        &-input {\r\n            width: 268px;\r\n            height: 48px;\r\n            border: 1px solid #e7e7eb;\r\n            box-sizing: border-box;\r\n            background-color: inherit;\r\n            color: inherit;\r\n        }\r\n\r\n        &-button {\r\n            width: 86px;\r\n            height: 48px;\r\n            background-color: #3c47e9;\r\n            color: inherit;\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n\r\n    &__itemlist {\r\n        display: flex;\r\n        flex-direction: column;\r\n        gap: 1rem;\r\n        height: 70%;\r\n        overflow: auto;\r\n    }\r\n    &__item {\r\n        box-sizing: border-box;\r\n        color: #e7e7eb;\r\n        height: 64px;\r\n        cursor: pointer;\r\n        position: relative;\r\n        width: 86px;\r\n        &:hover {\r\n            border: 1px solid #616475;\r\n        }\r\n    }\r\n    &__item:hover::after {\r\n        content: \">\";\r\n        position: absolute;\r\n        height: 48px;\r\n        right: 8px;\r\n        top: 10px;\r\n        opacity: 0.5;\r\n    }\r\n}\r\n",
+                    "data": ".search {\r\n    &__container {\r\n        background-color: #1e213a;\r\n        width: 100%;\r\n        height: 100%;\r\n        display: flex;\r\n        flex-direction: column;\r\n        gap: 1rem;\r\n        color: #e7e7eb;\r\n        box-sizing: border-box;\r\n        padding: 1.5rem;\r\n    }\r\n    &__close {\r\n        align-self: end;\r\n        padding: 1rem;\r\n        cursor: pointer;\r\n    }\r\n\r\n    &__search {\r\n        width: 100%;\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-self: center;\r\n        position: relative;\r\n\r\n        &-input {\r\n            width: 268px;\r\n            height: 48px;\r\n            border: 1px solid #e7e7eb;\r\n            box-sizing: border-box;\r\n            background-color: inherit;\r\n            color: inherit;\r\n\r\n            &-error {\r\n                border: 1px solid maroon;\r\n            }\r\n        }\r\n\r\n        &-button {\r\n            width: 86px;\r\n            height: 48px;\r\n            background-color: #3c47e9;\r\n            color: inherit;\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n            cursor: pointer;\r\n        }\r\n    }\r\n\r\n    &__itemlist {\r\n        display: flex;\r\n        flex-direction: column;\r\n        gap: 1rem;\r\n        height: 70%;\r\n        overflow: auto;\r\n    }\r\n    &__item {\r\n        box-sizing: border-box;\r\n        color: #e7e7eb;\r\n        height: 64px;\r\n        cursor: pointer;\r\n        position: relative;\r\n        width: 86px;\r\n        &:hover {\r\n            border: 1px solid #616475;\r\n        }\r\n    }\r\n    &__item:hover::after {\r\n        content: \">\";\r\n        position: absolute;\r\n        height: 48px;\r\n        right: 8px;\r\n        top: 10px;\r\n        opacity: 0.5;\r\n    }\r\n}\r\n",
                     "styleUrl": "./search.component.scss"
                 }
             ],
@@ -427,7 +914,7 @@
                         "type": "WeatherService"
                     }
                 ],
-                "line": 13,
+                "line": 16,
                 "jsdoctags": [
                     {
                         "name": "weatherService",
@@ -441,7 +928,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class='search__container'>\n    <mat-icon class='search__close'>close</mat-icon>\n    <div class=\"search__search\">\n        <input [ngModel]='searchInput' name='searchInput' id='searchInput' class=\"search__search-input\"\n            placeholder=\"Search Input\" />\n        <div (click)='searchCity()' class=\"search__search-button\">Search</div>\n    </div>\n\n    <mat-list class='search__itemlist'>\n        <mat-list-item *ngFor='let city of cities' class='search__item'>London</mat-list-item>\n\n    </mat-list>\n\n\n</div>"
+            "templateData": "<div class='search__container'>\n    <mat-icon class='search__close' (click)='close()'>close</mat-icon>\n    <div class=\"search__search\">\n        <input [(ngModel)]='searchInput' name='searchInput' id='searchInput' class=\"search__search-input\"\n            placeholder=\"Search Input\" [class]='error? \"search__search-input-error\":\"\"' />\n        <div (click)='searchCity()' class=\"search__search-button\">Search</div>\n    </div>\n\n    <mat-list class='search__itemlist'>\n        <mat-list-item *ngFor='let city of cities' class='search__item'>{{city.title}}</mat-list-item>\n\n    </mat-list>\n\n\n</div>"
         },
         {
             "name": "ShortComponent",
@@ -536,6 +1023,9 @@
                             "name": "InfoComponent"
                         },
                         {
+                            "name": "LayoutComponent"
+                        },
+                        {
                             "name": "SearchComponent"
                         },
                         {
@@ -602,6 +1092,14 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "actions",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/state/actions.ts",
+                "type": "object",
+                "defaultValue": "{\r\n    SET_METRIC: 'SET_METRIC'\r\n}"
+            },
+            {
                 "name": "Centigrades",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -623,7 +1121,15 @@
                 "subtype": "variable",
                 "file": "src/app/component.ts",
                 "type": "[]",
-                "defaultValue": "[\r\n    HighlightComponent,\r\n    ShortComponent,\r\n    InfoComponent,\r\n    SearchComponent\r\n]"
+                "defaultValue": "[\r\n    HighlightComponent,\r\n    ShortComponent,\r\n    InfoComponent,\r\n    SearchComponent,\r\n    LayoutComponent\r\n]"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/layout/layout.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "Default",
@@ -749,16 +1255,24 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/highlight/highlight.stories.ts",
-                "type": "Story<HighlightComponent>",
+                "file": "src/app/components/info/info.stories.ts",
+                "type": "Story<InfoComponent>",
                 "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
             },
             {
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/info/info.stories.ts",
-                "type": "Story<InfoComponent>",
+                "file": "src/app/components/layout/layout.stories.ts",
+                "type": "Story<LayoutComponent>",
+                "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/highlight/highlight.stories.ts",
+                "type": "Story<HighlightComponent>",
                 "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
             },
             {
@@ -814,6 +1328,16 @@
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
+            "src/app/components/state/actions.ts": [
+                {
+                    "name": "actions",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/state/actions.ts",
+                    "type": "object",
+                    "defaultValue": "{\r\n    SET_METRIC: 'SET_METRIC'\r\n}"
+                }
+            ],
             "src/app/components/info/info.stories.ts": [
                 {
                     "name": "Centigrades",
@@ -937,7 +1461,25 @@
                     "subtype": "variable",
                     "file": "src/app/component.ts",
                     "type": "[]",
-                    "defaultValue": "[\r\n    HighlightComponent,\r\n    ShortComponent,\r\n    InfoComponent,\r\n    SearchComponent\r\n]"
+                    "defaultValue": "[\r\n    HighlightComponent,\r\n    ShortComponent,\r\n    InfoComponent,\r\n    SearchComponent,\r\n    LayoutComponent\r\n]"
+                }
+            ],
+            "src/app/components/layout/layout.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/layout/layout.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/layout/layout.stories.ts",
+                    "type": "Story<LayoutComponent>",
+                    "defaultValue": "args => ({\r\n    props: {\r\n        ...args\r\n    }\r\n})"
                 }
             ],
             "src/app/components/search/search.stories.ts": [
@@ -1134,7 +1676,7 @@
                 "linktype": "component",
                 "name": "InfoComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {
@@ -1168,12 +1710,41 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/components/layout/layout.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "LayoutComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/12",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/layout/layout.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/layout/layout.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/components/search/search.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "SearchComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/6",
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {
@@ -1316,6 +1887,43 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/components/state/actions.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "SetMetric",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/state/actions.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "actions",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/state/state.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "WeatherState",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/state/state.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "WeatherStateModel",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/model/highlight.model.ts",
                 "type": "interface",
                 "linktype": "interface",
@@ -1334,6 +1942,15 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/model/search.mode.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Location",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/model/short.model.ts",
                 "type": "interface",
                 "linktype": "interface",
@@ -1348,7 +1965,7 @@
                 "linktype": "injectable",
                 "name": "WeatherService",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {

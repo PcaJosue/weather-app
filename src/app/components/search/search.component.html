@@ -6,10 +6,15 @@
         <div (click)='searchCity()' class="search__search-button">Search</div>
     </div>
 
+    <div *ngIf='cities?.length===0'>
+        Not found
+    </div>
     <mat-list class='search__itemlist'>
-        <mat-list-item *ngFor='let city of cities' class='search__item'>{{city.title}}</mat-list-item>
+        <mat-list-item (click)='selectCity(city)' *ngFor='let city of cities' class='search__item'>{{city.title}}
+        </mat-list-item>
 
     </mat-list>
+
 
 
 </div>

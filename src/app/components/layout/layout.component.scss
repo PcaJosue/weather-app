@@ -1,24 +1,82 @@
 .layout {
+    &__loading {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     &__container {
         width: 100%;
-        height: 95vh;
+        display: flex;
+        flex-direction: row;
+        @media (max-width: 1400px) {
+            flex-direction: column;
+        }
     }
 
     &__sidenav {
-        width: 459px;
-        height: 100%;
+        width: 100%;
+        padding: 0;
+        width: 30%;
+        @media (max-width: 1400px) {
+            width: 100%;
+        }
     }
 
     &__content {
         box-sizing: border-box;
         background-color: #100e1d;
-        padding: 1.5rem 6rem;
+        padding: 1.5rem 10rem;
         color: #a09fb1;
 
+        &-buttons {
+            display: flex;
+            justify-content: end;
+            gap: 10px;
+            margin-bottom: 3rem;
+            cursor: pointer;
+            span {
+                text-align: center;
+                background-color: #585676;
+                color: #e7e7eb;
+                line-height: 21px;
+                font-size: 18px;
+                font-weight: bold;
+                padding: 5px;
+                border-radius: 50%;
+                &.active {
+                    background-color: #e7e7eb;
+                    color: #110e3c;
+                }
+            }
+        }
+        &__shorts {
+            .col {
+                margin-top: 2rem;
+            }
+        }
         &-highlights {
+            &-title {
+                color: #e7e7eb;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 28px;
+                margin-top: 3rem;
+            }
             .col {
                 margin-top: 2.5rem;
             }
+        }
+
+        &-footer {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            text-align: center;
+            color: #a09fb1;
+            margin-top: 5rem;
         }
     }
 }

@@ -4,6 +4,7 @@ export interface Highlight {
     graphic?: {
         icon?: string,
         label: string | number,
-        type: 'wind' | 'humidity'
+        type: string,
+        value?: number
     }
 }

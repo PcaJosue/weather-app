@@ -5,9 +5,13 @@
     </div>
     <div class='short__range'>
         <span>
-            {{ centigrades ? short.range.max : (short.range.max * (9/5) ) +32 }}° {{centigrades ? 'C':'F'}}</span>
+            {{ (centigrades$ | async) ? short.range.max : ((short.range.max * (9/5) ) +32) | number : '1.2-2' }}°
+            {{(centigrades$ | async) ?
+            'C':'F'}}</span>
         <span class='short__range-min'>
-            {{ centigrades ? short.range.min : (short.range.min * (9/5) ) +32 }}° {{centigrades ? 'C':'F'}}
+            {{ (centigrades$ | async) ? short.range.min : ((short.range.min * (9/5) ) +32) | number : '1.2-2' }}°
+            {{(centigrades$ | async) ?
+            'C':'F'}}
         </span>
     </div>
 </div>

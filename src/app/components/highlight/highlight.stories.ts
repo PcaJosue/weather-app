@@ -30,7 +30,7 @@ Wind.args = {
         graphic: {
             icon: 'arrow_drop_down',
             label: 'WSW',
-            type: 'wind'
+            type: 'wind',
         }
     }
 }

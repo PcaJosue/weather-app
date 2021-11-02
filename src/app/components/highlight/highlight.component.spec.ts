@@ -56,7 +56,7 @@ describe('HighlightComponent', () => {
   it('it should have a icon', () => {
 
     fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('.highlight__graphic - wind mat-icon')))
+    expect(fixture.debugElement.query(By.css('.highlight__graphic-wind mat-icon')))
       .toBeTruthy();
   })
 });

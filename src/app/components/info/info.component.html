@@ -5,9 +5,11 @@
     </div>
     <img class='info__img' src='../../../assets/img/{{info.img}}.png'>
     <div class="info__temperature">
-        <span class='info__temperature-value'>{{ centigrades ? info.temperature : (info.temperature * (9/5) ) +32
-            }}</span>
-        <span class='info__temperature-metric'> ° {{centigrades ? 'C':'F'}}</span>
+        <span class='info__temperature-value'>{{ (centigrades$ | async ) ?
+            (info.temperature | number : '1.2-2') :
+            ((info.temperature * (9/5) ) +32) | number : '1.2-2' }}
+        </span>
+        <span class='info__temperature-metric'> {{(centigrades$|async) ? '°C':'°F'}}</span>
     </div>
     <div class="info__weather">{{info.weather}}</div>
 
