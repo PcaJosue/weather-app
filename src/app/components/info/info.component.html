@@ -3,7 +3,7 @@
         <div class='info__search-button' (click)='search()'><span>Search for places</span></div>
         <mat-icon class='info__search-current' (click)='searchMyLocation()'>my_location</mat-icon>
     </div>
-    <img class='info__img' src='../../../assets/img/{{info.img}}.png'>
+    <img class='info__img' src='assets/img/{{info.img}}.png'>
     <div class="info__temperature">
         <span class='info__temperature-value'>{{ (centigrades$ | async ) ?
             (info.temperature | number : '1.2-2') :
