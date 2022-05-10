@@ -49,5 +49,11 @@
 </div>
 
 <div class='layout__loading' *ngIf='loading'>
+    <h1 *ngIf="showMessage">
+
+        Please, visit the page <a href="https://cors-anywhere.herokuapp.com/corsdemo"
+            target="_blank">(https://cors-anywhere.herokuapp.com/corsdemo)</a> to enable the external
+        API, if you already did , please refresh.
+    </h1>
     <mat-spinner></mat-spinner>
 </div>

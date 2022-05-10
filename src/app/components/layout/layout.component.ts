@@ -23,6 +23,7 @@ export class LayoutComponent implements OnInit {
 
   searching: boolean = false;
   loading: boolean = true;
+  showMessage: boolean = false;
 
   constructor(private store: Store, private weatherService: WeatherService) { }
 
@@ -35,14 +36,21 @@ export class LayoutComponent implements OnInit {
         const info = await this.weatherService.getInfo(data[0].woeid).toPromise();
         this.store.dispatch(new SetInfo(info))
         this.loading = false;
-      } catch (error) { }
+      } catch (error) {
+        if (error.status == 403) {
+          this.showMessage = true;
+        }
+      }
     }, async (error) => {
 
       try {
         const info = await this.weatherService.getInfo(44418).toPromise();
         this.store.dispatch(new SetInfo(info))
         this.loading = false
-      } catch (error) { throw error }
+      } catch (error) {
+        console.log('thorw error', error);
+        throw error
+      }
     });
 
   }
