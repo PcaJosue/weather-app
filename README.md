@@ -1,105 +1,56 @@
+# Weather App Challenge
 
-<p align="center">
-  <a href="https://www.chromatic.com/">
-    <img alt="Chromatic" src="https://avatars2.githubusercontent.com/u/24584319?s=200&v=4" width="60" />
-  </a>
-</p>
+**Note: This challenge is deprecated as the API used in this project is no longer functional.**
 
-<h1 align="center">
-  Chromatic's Intro to Storybook Angular template
-</h1>
+This web application is the result of a challenge to create a weather app using an API. The objective was to utilize front-end libraries like React or Vue and fulfill the following user stories:
 
-This template ships with the main Angular and Storybook configuration files you'll need to get up and running fast.
+## User Stories
 
-## 🚅  Quick start
+- **User story:** As a user, I can see the weather of a city as the default, preferably based on my current location.
+- **User story:** As a user, I can search for a specific city to view its weather information.
+- **User story:** As a user, I can see the weather forecast for today and the next five days.
+- **User story:** As a user, I can see the date and location associated with the weather information.
+- **User story:** As a user, I can view an image representing the weather condition for each day.
+- **User story:** As a user, I can see the minimum and maximum temperature for each day.
+- **User story:** As a user, I can see the wind status and wind direction.
+- **User story:** As a user, I can see the humidity percentage.
+- **User story:** As a user, I can see an indicator for visibility.
+- **User story:** As a user, I can see the air pressure measurement.
+- **User story (optional):** As a user, I can request the weather information for my current location.
+- **User story (optional):** As a user, I can convert temperature values between Celsius and Fahrenheit.
 
-1.  **Create the application.**
+## Instructions
 
-    Use [degit](https://github.com/Rich-Harris/degit) to get this template.
+1. Clone or download the repository to your local machine.
+2. Open the project in your preferred code editor.
+3. Install the necessary dependencies using the package manager of your choice (e.g., npm or yarn).
+4. Run the development server to start the application locally.
+5. Access the application through your browser using the provided URL or `localhost`.
+6. Enjoy exploring the weather information and features provided by the application.
 
-    ```shell
-    # Clone the template
-    npx degit chromaui/intro-storybook-angular-template taskbox
-    ```
+## Deprecated
 
-1.  **Install the dependencies.**
+**Please note that this challenge is deprecated as the API used to fetch the weather information is no longer functional. The app will not display current weather data.**
 
-    Navigate into your new site’s directory and install the necessary dependencies.
+Due to the deprecated nature of this project, it is recommended to use alternative APIs or data sources to fetch weather information and update the application accordingly.
 
-    ```shell
-    # Navigate to the directory
-    cd taskbox/
+## Technologies Used
 
-    # Install the dependencies
-    npm install
-    ```
+- Front-end framework: Angular
+- Package manager: npm or yarn
 
-1.  **Open the source code and start editing!**
+## Contributions
 
-    Open the `taskbox` directory in your code editor of choice and building your first component!
+Contributions to this project are welcome. If you encounter any issues or have suggestions for improvement, please feel free to open an issue or submit a pull request.
 
-1.  **Browse your stories!**
+## License
 
-    Run `npm run storybook` to see your component's stories at `http://localhost:6006`.
+This project is licensed under the MIT License
 
-## 🔎 What's inside?
+## Acknowledgements
 
-A quick look at the top-level files and directories included with this template.
+This project was inspired by the challenge provided by [devchallenges](https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv). We would like to thank them for the opportunity to work on this challenge and enhance our skills in building weather applications.
 
-    .
-    ├── .storybook
-    ├── node_modules
-    ├── src
-    ├── .browserslistrc
-    ├── .editorconfig
-    ├── .gitignore
-    ├── angular.json
-    ├── babel.config.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    ├── tsconfig.app.json
-    ├── tsconfig.json
-    ├── tsconfig.spec.json
-    ├── tslint.json
-    └── README.md
+## Contact
 
-
-1.  **`.storybook`**: This directory contains Storybook's [configuration](https://storybook.js.org/docs/react/configure/overview) files.
-
-2.  **`node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages).
-
-3.  **`src`**: This directory will contain all of the code related to what you will see on your application.
-
-4.  **`.browserslistrc`**: This file will contain the information regarding which browsers will be supported when the application is built.
-
-5.  **`.editorconfig`**: This file contains the configurations for [EditorConfig](https://editorconfig.org/).
-
-6. **`.gitignore`**: This file tells git which files it should not track or maintain during the development process of your project.
-
-7.  **`angular.json`**: This file contains all the configurations required for your Angular project.
-
-8.  **`.babel.config.js`**: This file tells [babel](https://babeljs.io/) how to transpile the application's code.
-
-9. **`LICENSE`**: The template is licensed under the MIT licence.
-
-10. **`package-lock.json`**: This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(Do not change it manually).**
-
-11. **`package.json`**: Standard manifest file for Node.js projects, which typically includes project specific metadata (such as the project's name, the author among other information). It's based on this file that npm will know which packages are necessary to the project.
-
-12. **`tsconfig.app.json`**: This file contains auxiliary configurations for your Angular project.
-
-13. **`tsconfig.json`**: This file contains configurations the required configurations for TypeScript.
-
-14. **`tsconfig.spec.json`**: This is a TypeScript configuration file aimed for application testing.
-
-
-## Contribute
-
-If you encounter an issue with the template, we encourage you to open an issue in this template's repository.
-
-## Learning Storybook
-
-1. Read our introductory tutorial at [Learn Storybook](https://storybook.js.org/tutorials/intro-to-storybook/angular/en/get-started/).
-2. Learn how to transform your component libraries into design systems in our [Design Systems for Developers](https://storybook.js.org/tutorials/design-systems-for-developers/) tutorial.
-2. See our official documentation at [Storybook](https://storybook.js.org/).
+If you have any questions, feel free to contact the project maintainer at [theqoder01@gmail.com].
